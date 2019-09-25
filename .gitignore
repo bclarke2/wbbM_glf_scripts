@@ -1,1 +1,11 @@
 .queryBLAST_active.py.swp
+DUF_blast_results15cutoff.xml
+blastResultstestWbbM.xml
+genome_scan_active.py
+get_accession_hspstart_active.py
+queryBLAST_active.py
+test_acc_start.txt
+test_blast_output.xml
+test_input_glf_find.txt
+testacc_list_small.txt
+wbbM_plus_glf.txt
