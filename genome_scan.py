@@ -1,4 +1,6 @@
 """
+genome_scan.py
+
 This script requires that Biopython is installed on your system.
 This script was used to identify the DUF4422 ORF(s) on nucleotide sequences
 retrieved from the NCBI Entrez database and search for the glf gene
@@ -15,12 +17,16 @@ for the annotation(s) referenced in SEARCHWORDS.
 
 Note that the postuuid() funcion requires a list of accessions
 for input and this must be derived from your file yourself
-if you are imoprting this as a module.
-The output file is written to in the fetchfasta_entrez_parse()
+if you are importing this as a module.
+The output file is written in the fetchfasta_entrez_parse()
 function and the filename (as with all constants) can be
 overwritten in the importing script. I would like to refactor
-this in the future to hav the function return a variable to
+this in the future to have the function return a variable to
 be written to a file external to the function.
+
+The output file contains the the translated DUF4422-containing sequence
+and other relevant information in a tab-delineated format.
+This can be changed to extract and write whatever you want.
 
 The general idea for this script was given to me by a script
 from Evan Mann formerly of the Dept of Mol and Cell
