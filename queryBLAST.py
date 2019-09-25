@@ -1,9 +1,11 @@
-# This script performs a blast query from a sequence in the file referenced in the variable
-# inputFile. tnlastn looks in the translated nucleotide database.
-# The output (outputFile) is an xml file of the results of the blast search.
-# See the source code for the Biopython Bio.Blast module for the parameters that can be used
-# This script was written to be  specific to my needs at the time but theparameters can be changed
-# by initializing the variables differently.
+'''
+This script performs a blast query from a sequence in the file referenced in the variable
+inputFile. tnlastn looks in the translated nucleotide database.
+The output (outputFile) is an xml file of the results of the blast search.
+See the source code for the Biopython Bio.Blast module for the parameters that can be used
+This script was written to be  specific to my needs at the time but theparameters can be changed
+by initializing the variables differently.
+'''
 
 from Bio.Blast import NCBIWWW
 
