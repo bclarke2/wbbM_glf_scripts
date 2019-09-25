@@ -35,14 +35,14 @@ from Bio import Entrez
 from Bio import SeqIO
 
 
-Entrez.email = 'bclarke@uoguelph.ca'
-Entrez.api_key = '09ea25f030032e76969cb1267ff153964708'
+Entrez.email = 'youremail@domain'
+Entrez.api_key = 'yourEntrezKey'
 
 DATABASE = 'nucleotide'
 BATCHSIZE = 1
-OUTPUTFILENAME = 'wbbM_plus_glf.txt'
+OUTPUTFILENAME = '<outputfilename.txt>'
 RETTYPE = 'gb'
-SEARCHWORDS = ['udp-galactopyranose mutase', 'glf']
+SEARCHWORDS = ['udp-galactopyranose mutase', 'glf'] # or whatever, just make it a list
 
 def postuuids(idlist, database):
 
@@ -65,11 +65,11 @@ def postuuids(idlist, database):
     print('\nQueryKey = {0}\nWebEnv = {1}'.format(queryKey, webEnv))
     return queryKey, webEnv
 
-def fetchfasta_entrez_parse(queryKey, webEnv, count, wbbMHspList):
+def fetchfasta_entrez_parse(queryKey, webEnv, count, listOfHsps):
     
     # This function fetches the data and writes to a file
     # queryKey and webEnv are returned by the postuuids method.
-    # wbbMHspList is a list of the start sites for the HSPs (blast high scoring pairs).
+    # listOfHsps is a list of the start sites for the HSPs (blast high scoring pairs).
     # count is the number of uuids and will be used to keep track of
     # the records being fetched below.
     from urllib.error import HTTPError
@@ -153,13 +153,13 @@ def fetchfasta_entrez_parse(queryKey, webEnv, count, wbbMHspList):
             # encompassing the hsp.
             if feature.type == 'CDS' and \
                     feature.location_operator != 'join' and \
-                    feature.location.start.position <= (wbbMHspList[hspIndex] + 15) and \
-                    feature.location.end.position >= (wbbMHspList[hspIndex] + 15):
+                    feature.location.start.position <= (listOfHsps[hspIndex] + 15) and \
+                    feature.location.end.position >= (listOfHsps[hspIndex] + 15):
                 wbbMStartPosition = feature.location.start.position
                 wbbMEndPosition = feature.location.end.position
                 # amino acid length from the ORF
                 wbbMLength = (abs(feature.location.end.position - feature.location.start.position)) / 3
-                print(feature.type, feature.location.start.position, wbbMHspList[hspIndex])
+                print(feature.type, feature.location.start.position, listOfHsps[hspIndex])
                 print(wbbMStartPosition, wbbMEndPosition)
                 # qualifiers is a dictionary of lists
                 try:
@@ -187,7 +187,8 @@ def fetchfasta_entrez_parse(queryKey, webEnv, count, wbbMHspList):
                     #print(geneProduct)
                     #print(neighbours)
                     #print(keywords)
-                    # if neighbours set and keywords set intersect, then glf is present.
+                    # if neighbours set and keywords list share items, then glf is present.
+                    # I could have made keywords a set too, but it was not broken so I left it as is.
                     if any(i in neighbours for i in keywords):
                         glfPresent = True
                         glfCounter += 1
@@ -217,11 +218,11 @@ if __name__ == '__main__':
     from Bio import Entrez
     from Bio import SeqIO
 
-    Entrez.email = 'bclarke@uoguelph.ca'
-    Entrez.api_key = '09ea25f030032e76969cb1267ff153964708'
+    Entrez.email = 'youremail@domain'
+    Entrez.api_key = 'yourEntrezkey'
     DATABASE = 'nucleotide'
     BATCHSIZE = 1
-    OUTPUTFILENAME = 'wbbM_plus_glf.txt'
+    OUTPUTFILENAME = '<outputfilename,txt>'
     RETTYPE = 'gb'
     SEARCHWORDS = {'udp-galactopyranose mutase', 'glf'}
     
