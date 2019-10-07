@@ -3,7 +3,7 @@
 - `queryBLAST.py`
    Used to obtain an xml file of blast results by querying the NCBI databases
 
-- `get_accession_hspstart.py
+- `get_accession_hspstart.py`
    Used to generate a file of accession, hsp_start pairs from the blast result.
 
 - `genome_scan.py`  
